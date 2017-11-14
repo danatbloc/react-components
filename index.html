@@ -32,15 +32,36 @@
       );
 
 
-      function Bloc(props) {
-          return <h1>Bloc {props.adjective}</h1>;
+
+
+      class Bloc extends React.Component {
+        constructor(props){
+          super(props);
+          this.state = { time: new Date }
         }
 
+        render() {
+          return (
+            <div>
+              <h1>Bloc {this.props.adjective}</h1>
+              <h2>Time: {this.state.time.toLocaleTimeString()}</h2>
+            </div>
+          );
+        }
+      }
 
-      ReactDOM.render(
-        <Bloc adjective="rules!" />, document.getElementById('root')
-      );
+      // I don't think this is the way you're supposed to do it...
+      function UpdateTime (){
+        const root = document.getElementById('root')
+        root.innerHTML = <div></div>
 
+        ReactDOM.render(
+        <Bloc adjective="rules!" />,
+        root
+        );
+      }
+
+      setInterval(UpdateTime, 1000);
 
     </script>
   </body>
